@@ -1,0 +1,82 @@
+.wrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25%;
+    width: 19%;
+    height: 25%;
+    background-color: rgba(140, 140, 140, .9);
+    box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
+    background-color: #1a1a1a;
+    border-radius: 6px;
+    text-align: left;
+    overflow: hidden;
+    border: 2px solid #1a1a1a;
+    display: none;
+}
+
+.new-alert {
+    background-color: #c90404;
+    border-bottom: 2px solid #1a1a1a;
+    margin-bottom: 15px;
+    width: 19%;
+    border-radius: .25rem;
+    height: 25%;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+
+.header {
+    background-color: #ff5f00;
+    color: #fff;
+    padding: 10px;
+    background-size: 30px 30px;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    -webkit-animation: animate-stripes 3s linear infinite;
+    transition: width 0.3s;
+    transition-timing-function: ease-out;
+    text-align: center;
+    font-weight: 900;
+}
+
+.outfit-name {
+    width: 99.25%;
+    font-size: 30px;
+}
+
+.btn-save, .btn-overwrite {
+    width: 100%;
+    display: block;
+    font-weight: 400;
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    background-color: #474747;
+    border: 2px solid #9e9e9e;
+    color: #fff;
+}
+
+.btn-save:hover, .btn-overwrite:hover {
+    border: 2px solid #ff5f00;
+    transition: 1000ms;
+    cursor: pointer;
+}
+
+@keyframes animate-stripes {
+    0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+}
