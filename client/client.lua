@@ -1,6 +1,11 @@
 local _menuPool = NativeUI.CreatePool()
 local clothesMenu = NativeUI.CreateMenu("Clothing", "Edit Your Look")
 _menuPool:Add(clothesMenu)
+local headMenu = _menuPool:AddSubMenu(clothesMenu, "Head", "", true)
+local bodyMenu = _menuPool:AddSubMenu(clothesMenu, "Body", "", true)
+local lowerbodyMenu = _menuPool:AddSubMenu(clothesMenu, "Lower Body", "", true)
+local miscMenu = _menuPool:AddSubMenu(clothesMenu, "Miscellaneous", "", true)
+local saveMenu = _menuPool:AddSubMenu(clothesMenu, "Save Outfit", "", true)
 
 skinFunctions = {}
 
@@ -14,7 +19,7 @@ function GenerateMenu(isNewChar, outfit)
         data = json.decode(outfit)
     end
     
-    local headMenu = _menuPool:AddSubMenu(clothesMenu, "Head", "", true)
+    headMenu = _menuPool:AddSubMenu(clothesMenu, "Head", "", true)
         local hatSelect = NativeUI.CreateListItem("Hat", getPropList(0), data.outfit.head.hat, "Press ENTER To Cycle Through Textures")
         local hatTextures = NativeUI.CreateStatisticsPanel()
         local glassesSelect = NativeUI.CreateListItem("Glasses", getPropList(1), data.outfit.head.glasses, "Press ENTER To Cycle Through Textures")
@@ -23,7 +28,7 @@ function GenerateMenu(isNewChar, outfit)
         local masksTextures = NativeUI.CreateStatisticsPanel()
         local earsSelect = NativeUI.CreateListItem("Piercings", getPropList(2), data.outfit.head.ears, "Press ENTER To Cycle Through Textures")
         local earTextures = NativeUI.CreateStatisticsPanel()
-    local bodyMenu = _menuPool:AddSubMenu(clothesMenu, "Body", "", true)
+    bodyMenu = _menuPool:AddSubMenu(clothesMenu, "Body", "", true)
         local undershirtSelect = NativeUI.CreateListItem("Undershirt", getDrawableList(8), data.outfit.body.undershirt, "Press ENTER To Cycle Through Textures")
         local undershirtTextures = NativeUI.CreateStatisticsPanel()
         local shirtSelect = NativeUI.CreateListItem("Shirt", getDrawableList(11), data.outfit.body.shirt, "Press ENTER To Cycle Through Textures")
@@ -34,19 +39,18 @@ function GenerateMenu(isNewChar, outfit)
         local vestTextures = NativeUI.CreateStatisticsPanel()
         local armsSelect = NativeUI.CreateListItem("Arms / Gloves", getDrawableList(3), data.outfit.body.arms, "Press ENTER To Cycle Through Textures")
         local armsTextures = NativeUI.CreateStatisticsPanel()
-    local lowerbodyMenu = _menuPool:AddSubMenu(clothesMenu, "Lower Body", "", true)
+    lowerbodyMenu = _menuPool:AddSubMenu(clothesMenu, "Lower Body", "", true)
         local pantsSelect = NativeUI.CreateListItem("Pants", getDrawableList(4), data.outfit.lowerbody.pants, "Press ENTER To Cycle Through Textures")
         local pantsTextures = NativeUI.CreateStatisticsPanel()
         local shoesSelect = NativeUI.CreateListItem("Shoes", getDrawableList(6), data.outfit.lowerbody.shoes, "Press ENTER To Cycle Through Textures")
         local shoesTextures = NativeUI.CreateStatisticsPanel()
-    local miscMenu = _menuPool:AddSubMenu(clothesMenu, "Miscellaneous", "", true)
+    miscMenu = _menuPool:AddSubMenu(clothesMenu, "Miscellaneous", "", true)
         local bagSelect = NativeUI.CreateListItem("Bags / Accessory 2", getMasks(5), data.outfit.misc.bag, "Press ENTER To Cycle Through Textures")
         local bagTextures = NativeUI.CreateStatisticsPanel()
-    local saveMenu = _menuPool:AddSubMenu(clothesMenu, "Save Outfit", "", true)
+    saveMenu = _menuPool:AddSubMenu(clothesMenu, "Save Outfit", "", true)
         local cancelSave = NativeUI.CreateItem("Cancel", "Do you want to finish and save this outfit?")
         local newSave = NativeUI.CreateItem("Save New Outfit", "Do you want to finish and save this outfit?")
         local overwriteSave = NativeUI.CreateItem("Overwrite Current Outfit", "Do you want to finish and save this outfit?")
-
 
     clothesMenu.Settings.MouseControlsEnabled = false
     clothesMenu.Settings.MouseEdgeEnabled = false
@@ -465,7 +469,7 @@ function IsNearShop()
         local distance = #(vector3(shop.x, shop.y, shop.z) - plyCoords)
         --local distance = GetDistanceBetweenCoords(shop.x, shop.y, shop.z, plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
         if distance < 11.0 then
-            if not clothesMenu:Visible() then
+            if not clothesMenu:Visible() and not headMenu.SubMenu:Visible() and not bodyMenu.SubMenu:Visible() and not lowerbodyMenu.SubMenu:Visible() and not miscMenu.SubMenu:Visible() and not saveMenu.SubMenu:Visible() then
                 exports['mythic_base']:PrintHelpText('Press ~INPUT_CONTEXT~ to ~g~shop for clothes')
                 return true
             end
@@ -480,7 +484,6 @@ function IsNearShop()
     return false
 end
 
---[[Citizen]]--
 Citizen.CreateThread(function()
     while true do
         if IsNearShop() then
@@ -560,6 +563,17 @@ function getDrawableList(component)
     return list
 end
 
+RegisterNetEvent('mythic_clotheshop:client:ProcessMenus')
+AddEventHandler('mythic_clotheshop:client:ProcessMenus', function()
+    --[[Citizen]]--
+    Citizen.CreateThread(function()
+        while clothesMenu:Visible() or headMenu.SubMenu:Visible() or bodyMenu.SubMenu:Visible() or lowerbodyMenu.SubMenu:Visible() or miscMenu.SubMenu:Visible() or saveMenu.SubMenu:Visible() do
+            _menuPool:ProcessMenus()
+            Citizen.Wait(0)
+        end
+    end)
+end)
+
 RegisterNetEvent('mythic_clotheshop:client:SetOutfitLabel')
 AddEventHandler('mythic_clotheshop:client:SetOutfitLabel', function(label)
     SetNuiFocus(true, true)
@@ -569,17 +583,6 @@ AddEventHandler('mythic_clotheshop:client:SetOutfitLabel', function(label)
         outfit = data,
         type = isNewChar,
     })
-end)
-
-RegisterNetEvent('mythic_clotheshop:client:ProcessMenus')
-AddEventHandler('mythic_clotheshop:client:ProcessMenus', function()
-    --[[Citizen]]--
-    Citizen.CreateThread(function()
-        while clothesMenu:Visible() do
-            _menuPool:ProcessMenus()
-            Citizen.Wait(0)
-        end
-    end)
 end)
 
 RegisterNetEvent('mythic_clotheshop:client:LoadShopMenu')
