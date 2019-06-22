@@ -2,6 +2,7 @@
 This is a rather simple clotheshop script that was built for Mythic Framework.
 
 ![Mythic Clotheshop](https://i.imgur.com/rVLTKQp.jpg)
+--
 ![Mythic Clotheshop Closet](https://i.imgur.com/xTpeKL6.jpg)
 
 Dependencies :
@@ -9,6 +10,7 @@ Dependencies :
 - [NativeUILua - Reloaded](https://github.com/iTexZoz/NativeUILua_Reloaded)
 - [Mythic Notify](https://github.com/mythicrp/mythic_notify)
 - Mythic Base - NOT PUBLICLY RELEASED
+
 
 This also contains the closet script that is used in the Mythic Apartment release
 
