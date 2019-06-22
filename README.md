@@ -1,7 +1,7 @@
 # Mythic Clotheshop
 This is a rather simple clotheshop script that was built for Mythic Framework.
 
-![Mythic Clotheshop](https://i.imgur.com/rVLTKQp.jpg)
+![Mythic Clotheshop](https://i.imgur.com/my1UgG5.jpg)
 --
 ![Mythic Clotheshop Closet](https://i.imgur.com/xTpeKL6.jpg)
 
