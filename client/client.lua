@@ -6,8 +6,9 @@ skinFunctions = {}
 
 local data = json.decode('{ "outfit":{"head":{"hat":0,"hat_texture":0,"mask":0,"mask_texture":0,"glasses":0,"glasses_texutre":0,"ears":0,"ears_texture":0},"body":{"undershirt":0,"undershirt_texture":0,"shirt":0,"shirt_texture":0,"decals":0,"decals_texture":0,"vest":0,"vest_texture":0,"arms":0,"arms_texture":0},"lowerbody":{"pants":0,"pants_texture":0,"shoes":0,"shoes_texture":0},"misc":{"bag":0,"bag_texture":0}}}')
 
-clothesMenu.GenerateMenu = function(isNewChar, outfit)
+function GenerateMenu(isNewChar, outfit)
     clothesMenu:Clear() -- Clearing Menu Items
+
 
     if outfit ~= nil then
         data = json.decode(outfit)
@@ -464,8 +465,10 @@ function IsNearShop()
         local distance = #(vector3(shop.x, shop.y, shop.z) - plyCoords)
         --local distance = GetDistanceBetweenCoords(shop.x, shop.y, shop.z, plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
         if distance < 11.0 then
-            exports['mythic_base']:PrintHelpText('Press ~INPUT_CONTEXT~ to ~g~shop for clothes')
-            return true
+            if not clothesMenu:Visible() then
+                exports['mythic_base']:PrintHelpText('Press ~INPUT_CONTEXT~ to ~g~shop for clothes')
+                return true
+            end
         end
 
         if distance < shortest then
@@ -477,17 +480,12 @@ function IsNearShop()
     return false
 end
 
-function IsInVehicle()
-    local player = GetPlayerPed(-1)
-    return IsPedSittingInAnyVehicle(player)
-end
-
 --[[Citizen]]--
 Citizen.CreateThread(function()
     while true do
         if IsNearShop() then
             if IsControlJustPressed(1,51) then
-                if not IsInVehicle() then
+                if not IsPedSittingInAnyVehicle(GetPlayerPed(-1)) then
                     TriggerServerEvent('mythic_clotheshop:server:PrepareShop')
                 else
                   exports['mythic_notify']:DoHudText('error', 'Cannot Access Barber Shop While In A Vehicle')
@@ -573,9 +571,20 @@ AddEventHandler('mythic_clotheshop:client:SetOutfitLabel', function(label)
     })
 end)
 
+RegisterNetEvent('mythic_clotheshop:client:ProcessMenus')
+AddEventHandler('mythic_clotheshop:client:ProcessMenus', function()
+    --[[Citizen]]--
+    Citizen.CreateThread(function()
+        while clothesMenu:Visible() do
+            _menuPool:ProcessMenus()
+            Citizen.Wait(0)
+        end
+    end)
+end)
+
 RegisterNetEvent('mythic_clotheshop:client:LoadShopMenu')
 AddEventHandler('mythic_clotheshop:client:LoadShopMenu', function(isNewChar, outfit)
-    clothesMenu.GenerateMenu(isNewChar, outfit)
+    GenerateMenu(isNewChar, outfit)
     clothesMenu:Visible(not clothesMenu:Visible())
 end)
 

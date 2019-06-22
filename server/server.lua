@@ -8,14 +8,14 @@ AddEventHandler('mythic_clotheshop:server:PrepareShop', function()
 		if not isNewChar then
 			char.payCashOrBank(200, 'BINCOS', function(status)
 				if status ~= nil then
-					char.getNewIdCard(function(status2)
-						TriggerClientEvent('mythic_clotheshop:client:LoadShopMenu', src, isNewChar, outfit)
-					end)
+					TriggerClientEvent('mythic_clotheshop:client:ProcessMenus', src)
+					TriggerClientEvent('mythic_clotheshop:client:LoadShopMenu', src, isNewChar, outfit)
 				else
 					TriggerClientEvent("mythic_notify:client:SendAlert", src, { text = "Not Enough Funds", type = "error", layout = "topRight", timeout = 2500 })
 				end
 			end)
 		else
+			TriggerClientEvent('mythic_clotheshop:client:ProcessMenus', src)
 			TriggerClientEvent('mythic_clotheshop:client:LoadShopMenu', src, isNewChar, outfit)
 		end
 	end)
