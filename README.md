@@ -1,6 +1,9 @@
 # Mythic Clotheshop
 This is a rather simple clotheshop script that was built for Mythic Framework.
 
+![Mythic Clotheshop](https://i.imgur.com/rVLTKQp.jpg)
+![Mythic Clotheshop Closet](https://i.imgur.com/xTpeKL6.jpg)
+
 Dependencies :
 
 - [NativeUILua - Reloaded](https://github.com/iTexZoz/NativeUILua_Reloaded)
