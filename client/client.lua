@@ -409,11 +409,11 @@ clothesMenu.GenerateMenu = function(isNewChar, outfit)
     --[[ SAVE OUTFIT ]]--
     if isNewChar then
         saveMenu.SubMenu:AddItem(cancelSave)
-        saveMenu.SubMenu:AddItem(newSave)
-        newSave.Activated = function(ParentMenu, SelectedItem)
+        saveMenu.SubMenu:AddItem(overwriteSave)
+        overwriteSave.Activated = function(ParentMenu, SelectedItem)
             SetNuiFocus(true, true)
             SendNUIMessage({
-                action = "new",
+                action = 'overwrite',
                 outfit = data,
                 type = isNewChar,
             })
@@ -456,27 +456,47 @@ local clothingShops = {
     { x = -1108.44177246094, y = 2708.92358398438,  z = 19.1078643798828 },
 }
 
-local isLeaving = false
-
 function IsNearShop()
-    for _, item in pairs(clothingShops) do
+    local shortest = 100000
+    for _, shop in pairs(clothingShops) do
         local ply = GetPlayerPed(-1)
         local plyCoords = GetEntityCoords(ply, 0)
-        local distance = GetDistanceBetweenCoords(item.x, item.y, item.z, plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
-        if(distance < 50) then
-            DrawMarker(1, item.x, item.y, item.z-1,0,0,0,0,0,0,3.001,3.0001,0.5001,56,205,150,100,0,0,0,0)
-        end
-        if(distance < 13) then
+        local distance = #(vector3(shop.x, shop.y, shop.z) - plyCoords)
+        --local distance = GetDistanceBetweenCoords(shop.x, shop.y, shop.z, plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
+        if distance < 11.0 then
             exports['mythic_base']:PrintHelpText('Press ~INPUT_CONTEXT~ to ~g~shop for clothes')
             return true
         end
+
+        if distance < shortest then
+            shortest = distance
+        end
     end
+
+    Citizen.Wait(1000)
+    return false
 end
 
 function IsInVehicle()
     local player = GetPlayerPed(-1)
     return IsPedSittingInAnyVehicle(player)
 end
+
+--[[Citizen]]--
+Citizen.CreateThread(function()
+    while true do
+        if IsNearShop() then
+            if IsControlJustPressed(1,51) then
+                if not IsInVehicle() then
+                    TriggerServerEvent('mythic_clotheshop:server:PrepareShop')
+                else
+                  exports['mythic_notify']:DoHudText('error', 'Cannot Access Barber Shop While In A Vehicle')
+                end
+            end
+        end
+        Citizen.Wait(0)
+    end
+end)
 
 function getPropList(prop)
     local list = {}
@@ -541,28 +561,6 @@ function getDrawableList(component)
     end
     return list
 end
-
---[[Citizen]]--
-Citizen.CreateThread(function()
-    while (true) do
-        _menuPool:ProcessMenus()
-        if(IsNearShop()) then
-            if IsControlJustPressed(1,51) then
-                if not IsInVehicle() then
-                    TriggerServerEvent('mythic_clotheshop:server:PrepareShop')
-                    isLeaving = true
-                else
-                    exports['mythic_notify']:DoHudText('error', 'Cannot Access Clothes Shop While In A Vehicle')
-                end
-            end
-        else
-            if isLeaving then
-              isLeaving = false
-            end
-        end
-        Citizen.Wait(0)
-    end
-end)
 
 RegisterNetEvent('mythic_clotheshop:client:SetOutfitLabel')
 AddEventHandler('mythic_clotheshop:client:SetOutfitLabel', function(label)

@@ -1,17 +1,18 @@
 var outfitData = null;
 
-window.addEventListener("message", function (event) {
-    console.log('we in there bois');
-    if (event.data.action == "new") {
+window.addEventListener('message', function (event) {
+    if (event.data.action === "new") {
         outfitData = event.data.outfit;
-        $("#new-outfit").fadeIn();
+        $('#new-outfit').fadeIn();
 
         if(event.data.type) {
             $('.new-alert').fadeIn();
         }
-    }else if(event.data.action == "overwrite") {
+    }else if(event.data.action === 'overwrite') {
         outfitData = event.data.outfit;
-        $('#old-outfit').find('.outfit-name').val("" + event.data.label)
+        if(!event.data.isNewChar) {
+            $('#old-outfit').find('.outfit-name').val("" + event.data.label)
+        }
         $("#old-outfit").fadeIn();
 
         if(event.data.type) {
