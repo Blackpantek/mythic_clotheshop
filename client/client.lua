@@ -100,9 +100,9 @@ function GenerateMenu(isNewChar, outfit)
         hatTextures:SetPercentage(1, 0)
 
         if item.Value == 0 then
-            ClearPedProp(GetPlayerPed(-1), 0)
+            ClearPedProp(PlayerPedId(), 0)
         else
-            SetPedPropIndex(GetPlayerPed(-1), 0, item.Value, item.Texture, 0)
+            SetPedPropIndex(PlayerPedId(), 0, item.Value, item.Texture, 0)
         end
     end
     hatSelect.OnListSelected = function(ParentMenu, SelectedItem, Index)
@@ -117,9 +117,9 @@ function GenerateMenu(isNewChar, outfit)
         data.outfit.head.hat_texture    = item.Texture
 
         if item.Value == 0 then
-            ClearPedProp(GetPlayerPed(-1), 0)
+            ClearPedProp(PlayerPedId(), 0)
         else
-            SetPedPropIndex(GetPlayerPed(-1), 0, item.Value, item.Texture, 0)
+            SetPedPropIndex(PlayerPedId(), 0, item.Value, item.Texture, 0)
         end
     end
 
@@ -134,9 +134,9 @@ function GenerateMenu(isNewChar, outfit)
         hatTextures:SetPercentage(1, 0)
 
         if item.Value == 0 then
-            ClearPedProp(GetPlayerPed(-1), 1)
+            ClearPedProp(PlayerPedId(), 1)
         else
-            SetPedPropIndex(GetPlayerPed(-1), 1, item.Value, item.Texture, 0)
+            SetPedPropIndex(PlayerPedId(), 1, item.Value, item.Texture, 0)
         end
     end
     glassesSelect.OnListSelected = function(ParentMenu, SelectedItem, Index)
@@ -151,9 +151,9 @@ function GenerateMenu(isNewChar, outfit)
         data.outfit.head.glasses_texture    = item.Texture
 
         if item.Value == 0 then
-            ClearPedProp(GetPlayerPed(-1), 1)
+            ClearPedProp(PlayerPedId(), 1)
         else
-            SetPedPropIndex(GetPlayerPed(-1), 1, item.Value, item.Texture, 0)
+            SetPedPropIndex(PlayerPedId(), 1, item.Value, item.Texture, 0)
         end
     end
 
@@ -166,7 +166,7 @@ function GenerateMenu(isNewChar, outfit)
         data.outfit.head.mask           = item.Value
         data.outfit.head.mask_texture   = item.Texture
         hatTextures:SetPercentage(1, 0)
-        SetPedComponentVariation(GetPlayerPed(-1), 1, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 1, item.Value, item.Texture, 2)
     end
     masksSelect.OnListSelected = function(ParentMenu, SelectedItem, Index)
         local item = SelectedItem:IndexToItem(Index)
@@ -178,7 +178,7 @@ function GenerateMenu(isNewChar, outfit)
         local perTexWeight = 100 / item.Max
         masksTextures:SetPercentage(1, perTexWeight * item.Texture)
         data.outfit.head.mask_texture    = item.Texture
-        SetPedComponentVariation(GetPlayerPed(-1), 1, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 1, item.Value, item.Texture, 2)
     end
 
     earTextures:AddStatistics("Textures")
@@ -192,9 +192,9 @@ function GenerateMenu(isNewChar, outfit)
         hatTextures:SetPercentage(1, 0)
 
         if item.Value == 0 then
-            ClearPedProp(GetPlayerPed(-1), 2)
+            ClearPedProp(PlayerPedId(), 2)
         else
-            SetPedPropIndex(GetPlayerPed(-1), 2, item.Value, item.Texture, 0)
+            SetPedPropIndex(PlayerPedId(), 2, item.Value, item.Texture, 0)
         end
 
     end
@@ -210,9 +210,9 @@ function GenerateMenu(isNewChar, outfit)
         data.outfit.head.ears_texture    = item.Texture
 
         if item.Value == 0 then
-            ClearPedProp(GetPlayerPed(-1), 2)
+            ClearPedProp(PlayerPedId(), 2)
         else
-            SetPedPropIndex(GetPlayerPed(-1), 2, item.Value, item.Texture, 0)
+            SetPedPropIndex(PlayerPedId(), 2, item.Value, item.Texture, 0)
         end
     end
 
@@ -226,7 +226,7 @@ function GenerateMenu(isNewChar, outfit)
         data.outfit.body.undershirt         = item.Value
         data.outfit.body.undershirt_texture    = item.Texture
         undershirtTextures:SetPercentage(1, 0)
-        SetPedComponentVariation(GetPlayerPed(-1), 8, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 8, item.Value, item.Texture, 2)
     end
     undershirtSelect.OnListSelected = function(ParentMenu, SelectedItem, Index)
         local item = SelectedItem:IndexToItem(Index)
@@ -238,7 +238,7 @@ function GenerateMenu(isNewChar, outfit)
         local perTexWeight = 100 / item.Max
         undershirtTextures:SetPercentage(1, perTexWeight * item.Texture)
         data.outfit.body.undershirt_texture    = item.Texture
-        SetPedComponentVariation(GetPlayerPed(-1), 8, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 8, item.Value, item.Texture, 2)
     end
     
     shirtTextures:AddStatistics("Textures")
@@ -250,7 +250,7 @@ function GenerateMenu(isNewChar, outfit)
         data.outfit.body.shirt         = item.Value
         data.outfit.body.shirt_texture    = item.Texture
         shirtTextures:SetPercentage(1, 0)
-        SetPedComponentVariation(GetPlayerPed(-1), 11, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 11, item.Value, item.Texture, 2)
     end
     shirtSelect.OnListSelected = function(ParentMenu, SelectedItem, Index)
         local item = SelectedItem:IndexToItem(Index)
@@ -262,7 +262,7 @@ function GenerateMenu(isNewChar, outfit)
         local perTexWeight = 100 / item.Max
         shirtTextures:SetPercentage(1, perTexWeight * item.Texture)
         data.outfit.body.shirt_texture    = item.Texture
-        SetPedComponentVariation(GetPlayerPed(-1), 11, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 11, item.Value, item.Texture, 2)
     end
     
     decalsTextures:AddStatistics("Textures")
@@ -274,7 +274,7 @@ function GenerateMenu(isNewChar, outfit)
         data.outfit.body.decals         = item.Value
         data.outfit.body.decals_texture    = item.Texture
         decalsTextures:SetPercentage(1, 0)
-        SetPedComponentVariation(GetPlayerPed(-1), 10, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 10, item.Value, item.Texture, 2)
     end
     decalsSelect.OnListSelected = function(ParentMenu, SelectedItem, Index)
         local item = SelectedItem:IndexToItem(Index)
@@ -286,7 +286,7 @@ function GenerateMenu(isNewChar, outfit)
         local perTexWeight = 100 / item.Max
         decalsTextures:SetPercentage(1, perTexWeight * item.Texture)
         data.outfit.body.decals_texture    = item.Texture
-        SetPedComponentVariation(GetPlayerPed(-1), 10, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 10, item.Value, item.Texture, 2)
     end
     
     vestTextures:AddStatistics("Textures")
@@ -298,7 +298,7 @@ function GenerateMenu(isNewChar, outfit)
         data.outfit.body.vest         = item.Value
         data.outfit.body.vest_texture    = item.Texture
         vestTextures:SetPercentage(1, 0)
-        SetPedComponentVariation(GetPlayerPed(-1), 9, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 9, item.Value, item.Texture, 2)
     end
     vestSelect.OnListSelected = function(ParentMenu, SelectedItem, Index)
         local item = SelectedItem:IndexToItem(Index)
@@ -310,7 +310,7 @@ function GenerateMenu(isNewChar, outfit)
         local perTexWeight = 100 / item.Max
         vestTextures:SetPercentage(1, perTexWeight * item.Texture)
         data.outfit.body.vest_texture    = item.Texture
-        SetPedComponentVariation(GetPlayerPed(-1), 9, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 9, item.Value, item.Texture, 2)
     end
     
     armsTextures:AddStatistics("Textures")
@@ -322,7 +322,7 @@ function GenerateMenu(isNewChar, outfit)
         data.outfit.body.arms         = item.Value
         data.outfit.body.arms_texture    = item.Texture
         armsTextures:SetPercentage(1, 0)
-        SetPedComponentVariation(GetPlayerPed(-1), 3, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 3, item.Value, item.Texture, 2)
     end
     armsSelect.OnListSelected = function(ParentMenu, SelectedItem, Index)
         local item = SelectedItem:IndexToItem(Index)
@@ -334,7 +334,7 @@ function GenerateMenu(isNewChar, outfit)
         local perTexWeight = 100 / item.Max
         armsTextures:SetPercentage(1, perTexWeight * item.Texture)
         data.outfit.body.arms_texture    = item.Texture
-        SetPedComponentVariation(GetPlayerPed(-1), 3, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 3, item.Value, item.Texture, 2)
     end
 
     --[[ LOWER BODY ]]--
@@ -347,7 +347,7 @@ function GenerateMenu(isNewChar, outfit)
         data.outfit.lowerbody.pants         = item.Value
         data.outfit.lowerbody.pants_texture    = item.Texture
         pantsTextures:SetPercentage(1, 0)
-        SetPedComponentVariation(GetPlayerPed(-1), 4, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 4, item.Value, item.Texture, 2)
     end
     pantsSelect.OnListSelected = function(ParentMenu, SelectedItem, Index)
         local item = SelectedItem:IndexToItem(Index)
@@ -359,7 +359,7 @@ function GenerateMenu(isNewChar, outfit)
         local perTexWeight = 100 / item.Max
         pantsTextures:SetPercentage(1, perTexWeight * item.Texture)
         data.outfit.lowerbody.pants_texture    = item.Texture
-        SetPedComponentVariation(GetPlayerPed(-1), 4, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 4, item.Value, item.Texture, 2)
     end
 
     shoesTextures:AddStatistics("Textures")
@@ -371,7 +371,7 @@ function GenerateMenu(isNewChar, outfit)
         data.outfit.lowerbody.shoes         = item.Value
         data.outfit.lowerbody.shoes_texture    = item.Texture
         shoesTextures:SetPercentage(1, 0)
-        SetPedComponentVariation(GetPlayerPed(-1), 6, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 6, item.Value, item.Texture, 2)
     end
     shoesSelect.OnListSelected = function(ParentMenu, SelectedItem, Index)
         local item = SelectedItem:IndexToItem(Index)
@@ -383,7 +383,7 @@ function GenerateMenu(isNewChar, outfit)
         local perTexWeight = 100 / item.Max
         shoesTextures:SetPercentage(1, perTexWeight * item.Texture)
         data.outfit.lowerbody.shoes_texture    = item.Texture
-        SetPedComponentVariation(GetPlayerPed(-1), 6, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 6, item.Value, item.Texture, 2)
     end
 
     --[[ MISC ]]--
@@ -396,7 +396,7 @@ function GenerateMenu(isNewChar, outfit)
         data.outfit.misc.bag            = item.Value
         data.outfit.misc.bag_texture    = item.Texture
         bagTextures:SetPercentage(1, 0)
-        SetPedComponentVariation(GetPlayerPed(-1), 5, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 5, item.Value, item.Texture, 2)
     end
     bagSelect.OnListSelected = function(ParentMenu, SelectedItem, Index)
         local item = SelectedItem:IndexToItem(Index)
@@ -408,7 +408,7 @@ function GenerateMenu(isNewChar, outfit)
         local perTexWeight = 100 / item.Max
         bagTextures:SetPercentage(1, perTexWeight * item.Texture)
         data.outfit.misc.bag_texture    = item.Texture
-        SetPedComponentVariation(GetPlayerPed(-1), 5, item.Value, item.Texture, 2)
+        SetPedComponentVariation(PlayerPedId(), 5, item.Value, item.Texture, 2)
     end
 
     --[[ SAVE OUTFIT ]]--
@@ -424,7 +424,7 @@ function GenerateMenu(isNewChar, outfit)
             })
         end
 
-        exports['mythic_notify']:DoLongHudText('inform', 'Choose Carefully! This is the only time you\'ll be able to change your outfit for free!')
+        exports['mythic_notify']:SendAlert('inform', 'Choose Carefully! This is the only time you\'ll be able to change your outfit for free!', 5000)
     else
         saveMenu.SubMenu:AddItem(cancelSave)
         saveMenu.SubMenu:AddItem(newSave)
@@ -464,10 +464,9 @@ local clothingShops = {
 function IsNearShop()
     local shortest = 100000
     for _, shop in pairs(clothingShops) do
-        local ply = GetPlayerPed(-1)
+        local ply = PlayerPedId()
         local plyCoords = GetEntityCoords(ply, 0)
         local distance = #(vector3(shop.x, shop.y, shop.z) - plyCoords)
-        --local distance = GetDistanceBetweenCoords(shop.x, shop.y, shop.z, plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
         if distance < 11.0 then
             if not clothesMenu:Visible() and not headMenu.SubMenu:Visible() and not bodyMenu.SubMenu:Visible() and not lowerbodyMenu.SubMenu:Visible() and not miscMenu.SubMenu:Visible() and not saveMenu.SubMenu:Visible() then
                 exports['mythic_base']:PrintHelpText('Press ~INPUT_CONTEXT~ to ~g~shop for clothes')
@@ -480,7 +479,7 @@ function IsNearShop()
         end
     end
 
-    Citizen.Wait(1000)
+    Citizen.Wait(shortest * 30)
     return false
 end
 
@@ -488,10 +487,10 @@ Citizen.CreateThread(function()
     while true do
         if IsNearShop() then
             if IsControlJustPressed(1,51) then
-                if not IsPedSittingInAnyVehicle(GetPlayerPed(-1)) then
+                if not IsPedSittingInAnyVehicle(PlayerPedId()) then
                     TriggerServerEvent('mythic_clotheshop:server:PrepareShop')
                 else
-                  exports['mythic_notify']:DoHudText('error', 'Cannot Access Barber Shop While In A Vehicle')
+                  exports['mythic_notify']:SendAlert('error', 'Cannot Access Barber Shop While In A Vehicle')
                 end
             end
         end
@@ -508,14 +507,14 @@ function getPropList(prop)
     list[1].Texture         = 0
     list[1].Max             = 0
 
-    for i = 2, GetNumberOfPedPropDrawableVariations(GetPlayerPed(-1), prop) do
+    for i = 2, GetNumberOfPedPropDrawableVariations(PlayerPedId(), prop) do
         local cmp               = prop
         list[i]                 = {}
         list[i].Name            = i - 1
         list[i].Value           = i - 1
         list[i].Texture         = 0
-        if GetNumberOfPedPropTextureVariations(GetPlayerPed(-1), cmp, i) ~= nil then
-            list[i].Max         = GetNumberOfPedPropTextureVariations(GetPlayerPed(-1), cmp, i) - 1
+        if GetNumberOfPedPropTextureVariations(PlayerPedId(), cmp, i) ~= nil then
+            list[i].Max         = GetNumberOfPedPropTextureVariations(PlayerPedId(), cmp, i) - 1
         else
             list[i].Max         = 0
         end
@@ -532,15 +531,15 @@ function getMasks(component)
     list[1].Texture         = 0
     list[1].Max             = 0
 
-    for i = 2, GetNumberOfPedDrawableVariations(GetPlayerPed(-1), component) do
+    for i = 2, GetNumberOfPedDrawableVariations(PlayerPedId(), component) do
         local cmp               = component
         list[i]                 = {}
         list[i].Name            = i - 1
         list[i].Value           = i - 1
         list[i].Texture         = i - 1
         list[i].Max             = false
-        if GetNumberOfPedTextureVariations(GetPlayerPed(-1), cmp, i) - 1 ~= nil or GetNumberOfPedTextureVariations(GetPlayerPed(-1), cmp, i) - 1 > 0 then
-            list[i].Max         = GetNumberOfPedTextureVariations(GetPlayerPed(-1), cmp, i) - 1
+        if GetNumberOfPedTextureVariations(PlayerPedId(), cmp, i) - 1 ~= nil or GetNumberOfPedTextureVariations(PlayerPedId(), cmp, i) - 1 > 0 then
+            list[i].Max         = GetNumberOfPedTextureVariations(PlayerPedId(), cmp, i) - 1
         end
     end
     return list
@@ -549,15 +548,15 @@ end
 function getDrawableList(component)
     local list = {}
 
-    for i = 1, GetNumberOfPedDrawableVariations(GetPlayerPed(-1), component) do
+    for i = 1, GetNumberOfPedDrawableVariations(PlayerPedId(), component) do
         local cmp               = component
         list[i]                 = {}
         list[i].Name            = i
         list[i].Value           = i
         list[i].Texture         = 0
         list[i].Max             = false
-        if GetNumberOfPedTextureVariations(GetPlayerPed(-1), cmp, i) - 1 ~= nil or GetNumberOfPedTextureVariations(GetPlayerPed(-1), cmp, i) - 1 > 0 then
-            list[i].Max         = GetNumberOfPedTextureVariations(GetPlayerPed(-1), cmp, i) - 1
+        if GetNumberOfPedTextureVariations(PlayerPedId(), cmp, i) - 1 ~= nil or GetNumberOfPedTextureVariations(PlayerPedId(), cmp, i) - 1 > 0 then
+            list[i].Max         = GetNumberOfPedTextureVariations(PlayerPedId(), cmp, i) - 1
         end
     end
     return list

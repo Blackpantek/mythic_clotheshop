@@ -29,7 +29,7 @@ closetMenu.GenerateMenu = function(outfits, active_outfit)
                     active_outfit = v['id']
                     TriggerServerEvent('mythic_clotheshop:server:EquipOutfit', v['id'])
                 end
-                exports['mythic_notify']:DoHudText('success', v["title"] .. ' Equipped')
+                exports['mythic_notify']:SendAlert('success', v["title"] .. ' Equipped')
             end
         end
     end

@@ -51,9 +51,15 @@ client_scripts {
 
 files {
     'html/index.html',
-    'html/css/jquery-ui.css',
     'html/css/style.css',
     'html/js/app.js',
+
+    'html/css/jquery-ui.min.css',
+    'html/css/bootstrap.min.css',
+    'html/js/jquery.min.js',
+    'html/js/jquery-ui.min.js',
+    'html/js/bootstrap.min.js',
+    'html/js/popper.min.js',
 }
 
 dependencies {
