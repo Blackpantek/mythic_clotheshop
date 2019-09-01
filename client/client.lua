@@ -461,6 +461,12 @@ local clothingShops = {
     { x = -1108.44177246094, y = 2708.92358398438,  z = 19.1078643798828 },
 }
 
+function PrintHelpText(message)
+    SetTextComponentFormat("STRING")
+    AddTextComponentString(message)
+    DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+end
+
 function IsNearShop()
     local shortest = 100000
     for _, shop in pairs(clothingShops) do
@@ -469,7 +475,7 @@ function IsNearShop()
         local distance = #(vector3(shop.x, shop.y, shop.z) - plyCoords)
         if distance < 11.0 then
             if not clothesMenu:Visible() and not headMenu.SubMenu:Visible() and not bodyMenu.SubMenu:Visible() and not lowerbodyMenu.SubMenu:Visible() and not miscMenu.SubMenu:Visible() and not saveMenu.SubMenu:Visible() then
-                exports['mythic_base']:PrintHelpText('Press ~INPUT_CONTEXT~ to ~g~shop for clothes')
+                PrintHelpText('Press ~INPUT_CONTEXT~ to ~g~shop for clothes')
                 return true
             end
         end
